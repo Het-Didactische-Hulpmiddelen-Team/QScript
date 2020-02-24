@@ -1,5 +1,4 @@
-import requests
-import json
+import requests, json
 
 url = "http://server.arne.tech:8080"
 def addStudentToQ(roomID, studentName):
@@ -44,8 +43,15 @@ def showQueue(roomID):
     data = requests.get(url+"/room/queue/{0}".format(roomID)).json()
     print([str(d) for d in data])
 def auth():
-    requests.get(url+"/authenticate")
+    header = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
+    data = {'name':'root',
+            'password':'qwerty'
+            }
+    requests.post(url+"/authenticate", data=json.dumps(data), headers=header)
 def unauth():
     requests.get(url+"/unAuthenticate")
 
-deleteRoom(6)
+# createRoom("Fogels", "FOG", "C202")
