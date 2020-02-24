@@ -19,13 +19,16 @@ def deleteFirst(roomID):
     showQueue(roomID)
     
 def deleteRoom(roomID):
+    auth()
     requests.get(url+"/room/delete/{0}".format(roomID))
+    unauth()
        
 def listRoomsWithID():
     data = requests.get(url+"/room/all").json()
     for x in ["{0}  |  {1} - {2} - {3}".format(d["id"], d["vak"], d["lector"], d["vak"]) for d in data]:
         print(x)
 def createRoom(lector, course, classroom):
+    auth()
     data ={'lector':lector,
            'vak':course,
            'lokaal':classroom
@@ -35,8 +38,14 @@ def createRoom(lector, course, classroom):
         'Accept': 'application/json',
     }
     requests.post(url+"/room/create", data=json.dumps(data), headers=header)
+    unauth()
+    
 def showQueue(roomID):
     data = requests.get(url+"/room/queue/{0}".format(roomID)).json()
     print([str(d) for d in data])
-    
-createRoom("Fogels", "FOG", "C202")
+def auth():
+    requests.get(url+"/authenticate")
+def unauth():
+    requests.get(url+"/unAuthenticate")
+
+deleteRoom(6)
