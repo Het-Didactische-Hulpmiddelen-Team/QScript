@@ -1,11 +1,21 @@
-import requests, json
+import requests, json 
+import websocket
 
 url = "http://server.arne.tech:8080"
+
+echo = "ws://server.arne.tech:8080/echo"
+
+ws = websocket.WebSocket()
+ws.connect(echo)
+
+
 def addStudentToQ(roomID, studentName):
-    requests.get(url+"/room/join/{0}/{1}".format(roomID, studentName))
+    #requests.get(url+"/room/join/{0}/{1}".format(roomID, studentName))
+    ws.send("{0}-{1}-join".format(studentName,roomID))
     showQueue(roomID)
 def deleteStudentFromQ(roomID, studentName):
-    requests.get(url+"/room/leave/{0}/{1}".format(roomID, studentName))
+    #requests.get(url+"/room/leave/{0}/{1}".format(roomID, studentName))
+    ws.send("{0}-{1}-leave".format(studentName,roomID))
     showQueue(roomID)
 def deleteAllFromQ(roomID):
     requests.get(url+"/room/clear/{0}".format(roomID))
@@ -55,3 +65,5 @@ def unauth():
     requests.get(url+"/unAuthenticate")
 
 # createRoom("Fogels", "FOG", "C202")
+
+deleteStudentFromQ(1,"Bart")
