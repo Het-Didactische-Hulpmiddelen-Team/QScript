@@ -1,5 +1,7 @@
 # QScript
 
+## Usage
+
 * addStudentToQueue(roomID, studentName) zet de student achter aan de Q van een bepaalde Q-Room.
 * deleteStudentFromQueue(roomID, studentName) verwijderd een persoon uit de Q van een Q-Room.
 * deleteAllFromQueue(roomID) verwijderd iedereen uit de Q van een bepaalde Q-Room.
@@ -9,3 +11,6 @@
 * createRoom(lector, course, classroom) voegt een Q-Room toe aan het systeem.
 * deleteRoom(roomID) verwijderd een bepaalde Q-Room en zijn Q.
 * deleteFirst(roomID) verwijderd de eerste student uit de Q
+
+
+Made by the offical "Didactical Aids Team"
